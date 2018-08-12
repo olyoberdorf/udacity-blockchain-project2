@@ -297,7 +297,7 @@ class Blockchain{
 
         let errorLog = [];
 
-        for (var i=0; i<=this.height; i++) {
+        for (let i=0; i<=this.height; i++) {
           let block = await this.getBlock(i);
 
           // validate block
@@ -347,7 +347,7 @@ async function testLoadBlockchain() {
   if (height <= 1) {
      debug('looks like a fresh chain, adding 10 blocks');
      let thenables = [];
-	   for (var i=0; i<=10; i++) {
+	   for (let i=0; i<=10; i++) {
 	     await blockchain.addBlock(new Block("test data " + i));
 	   }
   } else {
@@ -376,7 +376,7 @@ async function testInduceErrors() {
   debug('test logic inducing errors at blocks 2,4,7');
   let inducedErrorBlocks = [2,4,7];
   thenables = [];
-  for (var i = 0; i < inducedErrorBlocks.length; i++) {
+  for (let i = 0; i < inducedErrorBlocks.length; i++) {
     blockchain.getBlock(inducedErrorBlocks[i]).then(function(block) {
       block.data = 'induced chain error';
       thenables.push(addLevelDBJSONAsync(block.height, block));
